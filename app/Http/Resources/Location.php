@@ -21,10 +21,7 @@ class Location extends JsonResource
         'city'    => $this->city,
         'state'     => $this->state,
         'country' => $this->country
+        'is_airport' => $this->is_airport
         ];
-    }
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
     }
 }

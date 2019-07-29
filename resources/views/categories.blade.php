@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,9 +41,13 @@
         </form>
       </div>
     </nav>
-        <p>{{$reservation['origin']}}</p>
+    <form method="POST" action="http://localhost:8000/rental/cars/">
         <div id="displayer" categories="{{ $categories }}"></div>
-
+        <input type="hidden" name="origin" id="origin" value="{{ $reservation['origin'] }}" />
+        <input type="hidden" name="destiny" id="destiny" value="{{ $reservation['destiny'] }}" />
+        <input type="hidden" name="reservation" id="reservation" value="{{ $reservation['reservation'] }}" />
+        <input type="hidden" name="return" id="return" value="{{ $reservation['return'] }}" />
         <script src="{{asset('js/app.js')}}" ></script>
+    </form>
     </body>
 </html>

@@ -17,7 +17,7 @@ export default class Displayer extends Component {
           <div className="container my-5">
             <h3>These are the categories available for that branch office</h3>
             <div className="form-group">
-            	<select className="form-control">
+            	<select className="form-control" name="category_id">
             		{opt_categories}
             	</select>
             </div>

@@ -13,11 +13,14 @@ class CreateLocationCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('location_category', function (Blueprint $table) {
+      Schema::rename('location_category', 'category_location');
+      /*
+        Schema::create('category_location', function (Blueprint $table) {
             $table->integer('location_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->timestamps();
         });
+        */
     }
 
     /**
@@ -27,6 +30,7 @@ class CreateLocationCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('location_category');
+        #Schema::dropIfExists('location_category');
+        Schema::rename('category_location', 'location_category');
     }
 }

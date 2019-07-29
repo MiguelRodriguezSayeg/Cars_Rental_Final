@@ -22,8 +22,4 @@ class Category extends JsonResource
             'capacity'     => (int) $this->year
         ];
     }
-    public function locations()
-    {
-        return $this->belongsToMany(Location::class);
-    }
 }

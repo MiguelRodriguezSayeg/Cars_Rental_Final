@@ -43,6 +43,7 @@ export default class Selector extends Component {
 
   get_Time(){
       var today = new Date();
+      today.setDate(today.getDate() + 1);
       today.setHours(today.getHours()+1);
       var day = today.getDate();
       day = (day>9 ? '' : '0') + day;
@@ -58,6 +59,7 @@ export default class Selector extends Component {
   }
   get_Max_Time(){
       var today = new Date();
+      today.setDate(today.getDate() + 1);
       today.setHours(today.getHours()+2);
       var day = today.getDate();
       day = (day>9 ? '' : '0') + day;
@@ -77,31 +79,32 @@ export default class Selector extends Component {
           <option key={loc.id} value={loc.id}>{loc.city} {loc.address}</option>
       );
       return (
-          <div className="container my-5">
+          <div className="container my-3" style={{backgroundColor: 'rgb(20, 28, 167, .7)'}}>
+            <h1 style={{color: 'white'}}>Reservation details</h1>
             <form method="POST" action="http://localhost:8000/rental/categories/">
               <div className="form-group">
-                <label htmlFor="origin">From:</label>
-              	<select className="form-control" name="origin" onChange={(item)=>{this.setState({origin:item.target.value})}}>
+                <label htmlFor="origin" style={{color: 'white'}}>From:</label>
+              	<select className="form-control" name="origin" onChange={(item)=>{this.setState({origin:item.target.value})}} required >
                   {opt_locations}
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="reservation">Reservation date:</label>
-                <input type="datetime-local" name="reservation" value={this.state.reservation} min={this.state.reservation} onChange={(item)=>{this.setState({reservation:item.target.value})}}
-                className="form-control" />
+                <label htmlFor="reservation" style={{color: 'white'}}>Reservation date:</label>
+                <input type="datetime-local" name="reservation" defaultValue={this.state.reservation} min={this.state.reservation} onChange={(item)=>{this.setState({reservation:item.target.value})}}
+                className="form-control" required />
               </div>
               <div className="form-group">
-                <label htmlFor="destiny">To:</label>
-                <select className="form-control" name="destiny" onChange={(item)=>{this.setState({destiny:item.target.value})}}>
+                <label htmlFor="destiny" style={{color: 'white'}}>To:</label>
+                <select className="form-control" name="destiny" onChange={(item)=>{this.setState({destiny:item.target.value})}} required >
                   {opt_locations}
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="return">Return date:</label>
-                <input type="datetime-local" value={this.state.return} min={this.state.return}
-                className="form-control" name="return" onChange={(item)=>{this.setState({return:item.target.value})}} />
+                <label htmlFor="return" style={{color: 'white'}}>Return date:</label>
+                <input type="datetime-local" defaultValue={this.state.return} min={this.state.return}
+                className="form-control" name="return" onChange={(item)=>{this.setState({return:item.target.value})}} required />
               </div>
-              <input  className="btn btn-primary" type="submit" value="Submit" />
+              <input className="btn btn-primary" type="submit" value="Submit" />
             </form>
           </div>
       );

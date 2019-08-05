@@ -7,6 +7,16 @@ import Selector from './Selector'
 import LocForm from './LocForm'
 import ExtraForm from './ExtraForm'
 import UserForm from './UserForm'
+import Reservation from './Reservation'
+import ReservationForm from './ReservationForm'
+import ReservationStatus from './ReservationStatus'
+import NavBar from './NavBar'
+import CatForm from './CatForm'
+import InsertLocModal from './InsertLocModal'
+import EditLocModal from './EditLocModal'
+import ResAdm from './ResAdm'
+import Payment from './Payment'
+import Cancel from './Cancel'
 
 
 class App extends Component {
@@ -14,12 +24,22 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <NavBar />
           <Selector />
           <Displayer />
           <CarDisplayer />
           <LocForm />
           <ExtraForm />
           <UserForm />
+          <Reservation />
+          <ReservationForm />
+          <ReservationStatus />
+          <CatForm />
+          <InsertLocModal />
+          <EditLocModal />
+          <ResAdm />
+          <Payment />
+          <Cancel />
         </div>
       </BrowserRouter>
     )

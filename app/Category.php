@@ -8,6 +8,7 @@ use App\Http\Resources\Location;
 class Category extends Model
 {
     protected $fillable = ['name', 'cost', 'capacity'];
+    public $timestamps = false;
     public function locations()
     {
         return $this->belongsToMany('App\Location');

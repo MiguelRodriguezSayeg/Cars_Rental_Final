@@ -10,7 +10,7 @@ export default class UserForm extends Component {
     let prop = JSON.parse(this.props.reservation);
     prop = prop[0];
     return (
-      <div className="container my-5">
+      <div className="container my-5" style={{backgroundColor: 'rgb(175, 196, 157, .6)'}}>
           <div className="form-group">
             <label htmlFor="name">Name:</label>
             <input type="text" name="name" className="form-control" />

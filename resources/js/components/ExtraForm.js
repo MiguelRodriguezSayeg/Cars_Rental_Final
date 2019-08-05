@@ -89,7 +89,7 @@ export default class ExtraForm extends Component {
         <div><label><input type="checkbox" id={ext.id} key={ext.id} value={ext.id} onClick={this.on_submit_change(ext)} />{ext.description}</label></div>
       );
     return (
-      <div>
+      <div style={{backgroundColor: 'rgb(175, 196, 157, .6)'}}>
       <div className="d-flex justify-content-around">
       <span className="p-2 bd-highlight">
         <h1>Extras:</h1>

@@ -14,7 +14,7 @@ export default class CarDisplayer extends Component {
   	  		<option key={car.id} value={car.id}>{car.brand} {car.name} {car.year}</option>
   	  	);
       return (
-          <div className="container my-5">
+          <div className="container my-5" style={{backgroundColor: 'rgb(175, 196, 157, .6)'}}>
             <h3>These are the available cars for that category.</h3>
             <div className="form-group">
             	<select className="form-control" name="model_id">

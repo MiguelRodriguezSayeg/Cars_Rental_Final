@@ -1,58 +1,102 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import InsertLocModal from './InsertLocModal'
+import EditLocModal from './EditLocModal'
+import DelLocModal from './DelLocModal'
 
 export default class LocForm extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      address:"",
-      city:"",
-      country: "",
-      state: "",
-      is_airport:"",
+      isShowingInsert: false,
+      isShowingEdit: false,
+      isShowingDel: false
     }
+    this.openModalHandlerInsert = this.openModalHandlerInsert.bind(this);
+    this.closeModalHandlerInsert = this.closeModalHandlerInsert.bind(this);
+    this.openModalHandlerEdit = this.openModalHandlerEdit.bind(this);
+    this.closeModalHandlerEdit = this.closeModalHandlerEdit.bind(this);
+    this.openModalHandlerDel = this.openModalHandlerDel.bind(this);
+    this.closeModalHandlerDel = this.closeModalHandlerDel.bind(this);
   }
-  submit(){
+  openModalHandlerInsert(){
+        this.setState({
+            isShowingEdit: false,
+            isShowingInsert: true,
+            isShowingDel:false
+        });
+    }
 
-    console.log(this.state);
-    fetch('http://localhost:8000/rental/store_loc',{
-      method:'post',
-      body:JSON.stringify(
-        this.state
-      ),
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-
+    closeModalHandlerInsert(){
+        this.setState({
+            isShowingInsert: false
+        });
+    }
+    openModalHandlerEdit(){
+          this.setState({
+            isShowingDel: false,
+              isShowingInsert: false,
+              isShowingEdit: true
+          });
       }
-    }).then(res => res.json())
-    .then(res => {
-      if (res.success) {
-        alert('Data successfully inserted.');
-      }else{
-        alert('There are issues with your data.');
-      }
-    })
-    .catch(function() {
-    });
-  }
 
+      closeModalHandlerEdit(){
+          this.setState({
+              isShowingEdit: false
+          });
+      }
+      openModalHandlerDel(){
+            this.setState({
+                isShowingEdit: false,
+                isShowingInsert: false,
+                isShowingDel: true
+            });
+        }
+
+        closeModalHandlerDel(){
+            this.setState({
+                isShowingDel: false
+            });
+        }
   render(){
     return (
-      <div className="App">
-        <h1>Location administrator</h1>
-        <label>Address</label>
-        <input type="text" name="address" onChange={(item)=>{this.setState({address:item.target.value})}} />
-        <label>City</label>
-        <input type="text" name="city" onChange={(item)=>{this.setState({city:item.target.value})}} />
-        <label>State</label>
-        <input type="text" name="state" onChange={(item)=>{this.setState({state:item.target.value})}} />
-        <label>Country</label>
-        <input type="text" name="country" onChange={(item)=>{this.setState({country:item.target.value})}} />
-        <label>Is Airport</label>
-        <input type="text" name="is_airport" onChange={(item)=>{this.setState({is_airport:item.target.value})}} />
-        <button onClick={()=>{this.submit()}}> Add Location</button>
+      <div>
+        { this.state.isShowingInsert ? <div onClick={this.closeModalHandlerInsert}></div> : null }
+        { this.state.isShowingEdit ? <div onClick={this.closeModalHandlerEdit}></div> : null }
+        { this.state.isShowingDel ? <div onClick={this.closeModalHandlerDel}></div> : null }
+        <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+          <div class="p-2 bd-highlight">
+            <button class="btn btn-primary" onClick={this.openModalHandlerInsert}>Insert</button>
+          </div>
+          <div class="p-2 bd-highlight">
+            <button class="btn btn-dark" onClick={this.openModalHandlerEdit}>Edit</button>
+          </div>
+          <div class="p-2 bd-highlight">
+            <button class="btn btn-danger" onClick={this.openModalHandlerDel}>Delete</button>
+          </div>
+        </div>
+        <div>
+        <InsertLocModal
+                    className="modal"
+                    show={this.state.isShowingInsert}
+                    close={this.closeModalHandlerInsert}>
+        </InsertLocModal>
+        </div>
+        <div>
+        <EditLocModal
+                    className="modal"
+                    show={this.state.isShowingEdit}
+                    close={this.closeModalHandlerEdit}>
+        </EditLocModal>
+        </div>
+        <div>
+        <DelLocModal
+                    className="modal"
+                    show={this.state.isShowingDel}
+                    close={this.closeModalHandlerDel}>
+        </DelLocModal>
+        </div>
       </div>
     );
   }

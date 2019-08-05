@@ -14,7 +14,7 @@ export default class Displayer extends Component {
   	  		<option key={cat.id} value={cat.id}>{cat.name}</option>
   	  	);
       return (
-          <div className="container my-5">
+          <div className="container my-5" style={{backgroundColor: 'rgb(175, 196, 157, .6)'}}>
             <h3>These are the categories available for that branch office</h3>
             <div className="form-group">
             	<select className="form-control" name="category_id">

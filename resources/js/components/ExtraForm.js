@@ -21,6 +21,7 @@ export default class ExtraForm extends Component {
     super(props)
     console.log('data from component', this.props.reservation);
     console.log('data from component', this.props.exval);
+    console.log('data from component', this.props.cities);
     this.state = {
       cost: this.get_cost(),
       extras:[]
@@ -31,13 +32,13 @@ export default class ExtraForm extends Component {
     return function(){
      var elemento = document.getElementById(ext.id);
      if(elemento.checked === true){
-       this.setState({cost: this.state.cost + ext.cost});
+       this.setState({cost: parseFloat(this.state.cost) + parseFloat(ext.cost)});
        this.setState({extras:
         this.state.extras.concat(ext.id)
       });
      }
      else{
-       this.setState({cost: this.state.cost - ext.cost});
+       this.setState({cost: parseFloat(this.state.cost) - parseFloat(ext.cost)});
        this.setState({extras:
          this.state.extras.filter(function(item) {
            return item !== ext.id
@@ -52,6 +53,7 @@ export default class ExtraForm extends Component {
     var date1 = this.get_date(obj[0].return);
     var date2 = this.get_date(obj[0].reservation);
     var difhora= Math.ceil(Math.abs(date1 - date2) / 36e5);
+    var precio_ciudad = Math.ceil(this.props.cities);
     if (difhora>24){
         var free_days = Math.floor(difhora/(24*6));
         var payment = difhora - free_days*24;
@@ -61,15 +63,15 @@ export default class ExtraForm extends Component {
         var precio = cat[0].cost*dias_completos + ((cat[0].cost/3)*horas_extras);
         precio = parseFloat(precio.toFixed(2));
         if(obj[0].is_airport == 1){
-          return precio + precio * 0.10
+          return parseFloat(parseFloat(precio + precio * 0.10) + parseFloat(this.props.cities)).toFixed(2);
         }
         else{
-          return precio;
+          return parseFloat(parseFloat(precio) + parseFloat(this.props.cities)).toFixed(2);
         }
 
     }
     else{
-        return parseFloat(cat[0].cost);
+        return (parseFloat(cat[0].cost) + parseFloat(this.props.cities)).toFixed(2);
     }
   }
   get_date(str){
@@ -125,5 +127,6 @@ if(document.getElementById('extraform')){
   var extra = document.getElementById('extraform').getAttribute('reservation');
   var exval = document.getElementById('extraform').getAttribute('exval');
   var cate = document.getElementById('extraform').getAttribute('category');
-	ReactDOM.render(<ExtraForm reservation={extra} exval={exval} category={cate} />, document.getElementById('extraform'));
+  var cit = document.getElementById('extraform').getAttribute('cities');
+	ReactDOM.render(<ExtraForm reservation={extra} exval={exval} category={cate} cities={cit}/>, document.getElementById('extraform'));
 }

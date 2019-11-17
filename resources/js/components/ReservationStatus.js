@@ -61,18 +61,22 @@ export default class ReservationStatus extends Component {
           </tbody>
         </table>
         <div class="d-flex flex-row bd-highlight mb-3">
-          <div class="p-2 bd-highlight">
-            <form method="POST" action="http://localhost:8000/rental/payment/">
-            <input type="hidden" name="reservation_id" id="reservation_id" value={reservation.id_res} />
-              <input  className="btn btn-primary" type="submit" value="Pay now!" />
-            </form>
-          </div>
+          { status == "Reserved" || status =="Payed"  ?
           <div class="p-2 bd-highlight">
           <form method="POST" action="http://localhost:8000/rental/cancel/">
             <input type="hidden" name="reservation_id" id="reservation_id" value={reservation.id_res} />
             <input  className="btn btn-primary" type="submit" value="Cancel" />
           </form>
           </div>
+           : null }
+           { status == "Reserved" ?
+           <div class="p-2 bd-highlight">
+             <form method="POST" action="http://localhost:8000/rental/payment/">
+             <input type="hidden" name="reservation_id" id="reservation_id" value={reservation.id_res} />
+               <input  className="btn btn-primary" type="submit" value="Pay now!" />
+             </form>
+           </div>
+            : null }
         </div>
         </div>
       );

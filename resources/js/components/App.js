@@ -17,6 +17,7 @@ import EditLocModal from './EditLocModal'
 import ResAdm from './ResAdm'
 import Payment from './Payment'
 import Cancel from './Cancel'
+import Home from './Home'
 
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
           <InsertLocModal />
           <EditLocModal />
           <ResAdm />
+          <Home />
           <Payment />
           <Cancel />
         </div>

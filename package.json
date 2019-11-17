@@ -26,7 +26,10 @@
     },
     "dependencies": {
         "cors": "^2.8.5",
+        "fs": "0.0.1-security",
         "install": "^0.13.0",
+        "net": "^1.0.2",
+        "node-geocoder": "^3.23.0",
         "react-bootstrap": "^1.0.0-beta.10",
         "react-foundation": "^0.9.6",
         "react-native": "^0.60.4",
@@ -35,6 +38,7 @@
         "react-stripe-elements": "^4.0.0",
         "react-toastify": "^5.3.2",
         "semantic-ui-react": "^0.87.3",
-        "stripe": "^7.6.0"
+        "stripe": "^7.6.0",
+        "tls": "0.0.1"
     }
 }

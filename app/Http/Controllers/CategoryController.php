@@ -8,6 +8,7 @@ use \App\Car;
 use \App\Transfers;
 use \App\Extra;
 use \App\Client;
+use \App\LatLoc;
 use \App\ExtraReservation;
 use \App\Reservation;
 use \App\Timestamp;
@@ -83,10 +84,30 @@ class CategoryController extends Controller
                        ));
         $cat_info = \App\Category::where('id', $data['category_id'])->get();
         $extras_in_loc = \App\Location::find($data['origin'])->extras;
+        $lat_ori = doubleval(\App\LatLoc::find($data['origin'])->latitute);
+        $lon_ori = doubleval(\App\LatLoc::find($data['origin'])->longitude);
+        $lat_des = doubleval(\App\LatLoc::find($data['destiny'])->latitute);
+        $lon_des = doubleval(\App\LatLoc::find($data['destiny'])->longitude);
+        $cities = $this->haversineGreatCircleDistance($lat_ori, $lon_ori, $lat_des, $lon_des);
         return view('extras')->with('reservation',json_encode($res_arr))
                             ->with('exval', json_encode($extras_in_loc))
+                            ->with('cities', ($cities/1000)* (0.3/10))
                             ->with('category', json_encode($cat_info));
     }
+    public function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000){
+      $latFrom = deg2rad($latitudeFrom);
+      $lonFrom = deg2rad($longitudeFrom);
+      $latTo = deg2rad($latitudeTo);
+      $lonTo = deg2rad($longitudeTo);
+
+      $latDelta = $latTo - $latFrom;
+      $lonDelta = $lonTo - $lonFrom;
+
+      $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+        cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+      return $angle * $earthRadius;
+    }
+
     public function user_form(Request $request){
       $data = request();
       $res = array(array("origin"=>$data['origin'],
@@ -325,6 +346,10 @@ class CategoryController extends Controller
       \App\Reservation::where('id_res', $id)
           ->update(['cost' => $amount]);
       return response()->json($amount);
+    }
+
+    public function home(){
+      return view('home');
     }
 
     public function cancel(Request $request){

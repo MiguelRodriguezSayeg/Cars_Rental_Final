@@ -25,7 +25,7 @@
     <div id="navbar"></div>
     <script src="{{asset('js/app.js')}}" ></script>
     <form method="POST" action="http://localhost:8000/rental/form/">
-      <div id="extraform" reservation="{{ $reservation }}" exval="{{ $exval }}" category="{{ $category }}"></div>
+      <div id="extraform" reservation="{{ $reservation }}" exval="{{ $exval }}" category="{{ $category }}" cities="{{$cities}}"></div>
     </form>
     </body>
     <script src="{{asset('js/app.js')}}" ></script>

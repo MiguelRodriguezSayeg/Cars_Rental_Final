@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 #PROCESO
+Route::get('/rental/home','CategoryController@home');
 Route::get('/rental/reserve/', 'CategoryController@index');
 Route::post('/rental/payment/', 'CategoryController@payment');
 Route::post('/rental/cancel/', 'CategoryController@cancel');

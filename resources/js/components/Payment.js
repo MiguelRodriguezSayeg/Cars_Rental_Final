@@ -88,7 +88,7 @@ export default class Payment extends Component {
         <div>
           <h5>Stripe</h5>
           <StripeCheckout
-            stripeKey="key"
+            stripeKey="pk_test_RxPed5oQJa04VopSRwBjYluv0050Q4P3Qp"
             token={this.handleToken}
             amount={this.state.reservation.cost * 100}
           />

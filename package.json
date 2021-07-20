@@ -32,7 +32,7 @@
         "node-geocoder": "^3.23.0",
         "react-bootstrap": "^1.0.0-beta.10",
         "react-foundation": "^0.9.6",
-        "react-native": "^0.60.4",
+        "react-native": "^0.62.3",
         "react-router-dom": "^5.0.1",
         "react-stripe-checkout": "^2.6.3",
         "react-stripe-elements": "^4.0.0",
